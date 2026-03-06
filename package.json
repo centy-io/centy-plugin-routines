@@ -1,0 +1,33 @@
+{
+  "name": "centy-plugin-routines",
+  "version": "0.1.0",
+  "description": "A Centy plugin that ships with a curated pool of routines — predefined repeatable processes, checklists, and workflows.",
+  "type": "module",
+  "bin": {
+    "centy-plugin-routines": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "centy",
+    "plugin",
+    "routines",
+    "checklists",
+    "workflows"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/prompts": "^2.4.9",
+    "typescript": "^5.7.0"
+  }
+}
