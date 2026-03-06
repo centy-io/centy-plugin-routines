@@ -1,6 +1,6 @@
 {
   "name": "centy-plugin-routines",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A Centy plugin that ships with a curated pool of routines — predefined repeatable processes, checklists, and workflows.",
   "type": "module",
   "bin": {

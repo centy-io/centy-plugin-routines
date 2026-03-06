@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1 (2026-03-06)
+
+### Docs
+
+- Enhance release routine documentation for autonomous versioning and CI/CD verification
+
 ## 0.2.0 (2026-03-06)
 
 Initial public release of `centy-plugin-routines`.
