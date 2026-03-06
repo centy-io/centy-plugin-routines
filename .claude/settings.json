@@ -8,7 +8,8 @@
       "Bash(gh repo:*)",
       "Bash(git push:*)",
       "Bash(centy:*)",
-      "Bash(gh run:*)"
+      "Bash(gh run:*)",
+      "Bash(npx centy:*)"
     ]
   }
 }
