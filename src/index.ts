@@ -62,39 +62,42 @@ async function main(): Promise<void> {
     return
   }
 
-  // Step 4: Prompt user to select a routine
+  // Step 4: Prompt user to select routines
   const response = await prompts(
     {
-      type: 'select',
-      name: 'selection',
-      message: 'Select a routine to add or update',
+      type: 'multiselect',
+      name: 'selections',
+      message: 'Select routines to add or update (space to toggle, enter to confirm)',
       choices,
+      instructions: false,
     },
     { onCancel: () => process.exit(0) },
   )
 
-  if (!response.selection) {
+  const selections = response.selections as Array<{ action: 'add' | 'update'; slug: string }> | undefined
+
+  if (!selections || selections.length === 0) {
+    console.log('No routines selected.')
     return
   }
 
-  const { action, slug } = response.selection as { action: 'add' | 'update'; slug: string }
-  const routine = catalog.find(r => r.slug === slug)!
-
-  // Step 5: Execute the action
-  try {
-    if (action === 'add') {
-      console.log(`\nAdding "${routine.title}"...`)
-      createRoutine(routine.title, routine.body)
-      console.log(`Routine "${routine.title}" added.`)
-    } else {
-      console.log(`\nUpdating "${routine.title}"...`)
-      updateRoutine(slug, routine.title, routine.body)
-      console.log(`Routine "${routine.title}" updated.`)
+  // Step 5: Execute the actions
+  for (const { action, slug } of selections) {
+    const routine = catalog.find(r => r.slug === slug)!
+    try {
+      if (action === 'add') {
+        console.log(`\nAdding "${routine.title}"...`)
+        createRoutine(routine.title, routine.body)
+        console.log(`Routine "${routine.title}" added.`)
+      } else {
+        console.log(`\nUpdating "${routine.title}"...`)
+        updateRoutine(slug, routine.title, routine.body)
+        console.log(`Routine "${routine.title}" updated.`)
+      }
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error)
+      console.error(`Failed to ${action} routine "${routine.title}": ${msg}`)
     }
-  } catch (error) {
-    const msg = error instanceof Error ? error.message : String(error)
-    console.error(`Failed to ${action} routine: ${msg}`)
-    process.exit(1)
   }
 }
 
