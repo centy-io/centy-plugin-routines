@@ -10,8 +10,8 @@ Prepare and release a new version of the project. Walk through the full release 
 5. Create a git commit with the version bump and changelog update
 6. Create a git tag for the new version
 7. Push the commit and tag to the remote
-8. Publish the package if applicable (npm, PyPI, etc.)
-9. Create a GitHub release with the changelog entry as the body
+8. Ensure there is a CI/CD workflow (e.g. GitHub Actions) that automatically publishes the package on new tags/releases. If one doesn't exist, create it for the project's platform (npm, PyPI, etc.)
+9. Create a GitHub release with the changelog entry as the body — this should trigger the CI/CD publish workflow
 
 ## Notes
 - If any step fails, stop and create a centy issue describing the failure
