@@ -32,7 +32,7 @@ export const catalog: CatalogRoutine[] = [
     slug: 'release-new-version',
     title: 'Release New Version',
     description: 'Prepare and release a new version of the project',
-    version: 1,
-    body: withVersion(loadRoutine('release-new-version.md'), 1),
+    version: 2,
+    body: withVersion(loadRoutine('release-new-version.md'), 2),
   },
 ]
