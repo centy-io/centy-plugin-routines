@@ -10,7 +10,11 @@
       "Bash(centy:*)",
       "Bash(gh run:*)",
       "Bash(npx centy:*)",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:docs.npmjs.com)",
+      "WebFetch(domain:ankush.one)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
