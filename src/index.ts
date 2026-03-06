@@ -11,10 +11,29 @@ interface Choice {
   disabled?: boolean
 }
 
+function executeSelections(selections: Array<{ action: 'add' | 'update'; slug: string }>): void {
+  for (const { action, slug } of selections) {
+    const routine = catalog.find(r => r.slug === slug)!
+    try {
+      if (action === 'add') {
+        console.log(`\nAdding "${routine.title}"...`)
+        createRoutine(routine.title, routine.body)
+        console.log(`Routine "${routine.title}" added.`)
+      } else {
+        console.log(`\nUpdating "${routine.title}"...`)
+        updateRoutine(slug, routine.title, routine.body)
+        console.log(`Routine "${routine.title}" updated.`)
+      }
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error)
+      console.error(`Failed to ${action} routine "${routine.title}": ${msg}`)
+    }
+  }
+}
+
 async function main(): Promise<void> {
   console.log('\ncenty-plugin-routines\n')
 
-  // Step 1: Ensure the routine item type is registered
   try {
     ensureItemType()
   } catch (error) {
@@ -24,10 +43,8 @@ async function main(): Promise<void> {
     process.exit(1)
   }
 
-  // Step 2: List installed routines
   const installed = listInstalledRoutines()
 
-  // Step 3: Build choices
   const choices: Choice[] = catalog.map(routine => {
     const existing = installed.find(r => r.slug === routine.slug)
 
@@ -62,7 +79,6 @@ async function main(): Promise<void> {
     return
   }
 
-  // Step 4: Prompt user to select routines
   const response = await prompts(
     {
       type: 'multiselect',
@@ -74,31 +90,14 @@ async function main(): Promise<void> {
     { onCancel: () => process.exit(0) },
   )
 
-  const selections = response.selections as Array<{ action: 'add' | 'update'; slug: string }> | undefined
+  const selections: Array<{ action: 'add' | 'update'; slug: string }> | undefined = response.selections
 
   if (!selections || selections.length === 0) {
     console.log('No routines selected.')
     return
   }
 
-  // Step 5: Execute the actions
-  for (const { action, slug } of selections) {
-    const routine = catalog.find(r => r.slug === slug)!
-    try {
-      if (action === 'add') {
-        console.log(`\nAdding "${routine.title}"...`)
-        createRoutine(routine.title, routine.body)
-        console.log(`Routine "${routine.title}" added.`)
-      } else {
-        console.log(`\nUpdating "${routine.title}"...`)
-        updateRoutine(slug, routine.title, routine.body)
-        console.log(`Routine "${routine.title}" updated.`)
-      }
-    } catch (error) {
-      const msg = error instanceof Error ? error.message : String(error)
-      console.error(`Failed to ${action} routine "${routine.title}": ${msg}`)
-    }
-  }
+  executeSelections(selections)
 }
 
 main()
