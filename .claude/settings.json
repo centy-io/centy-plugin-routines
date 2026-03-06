@@ -14,7 +14,9 @@
       "WebFetch(domain:docs.npmjs.com)",
       "WebFetch(domain:ankush.one)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(gh release:*)",
+      "Bash(git:*)"
     ]
   }
 }
