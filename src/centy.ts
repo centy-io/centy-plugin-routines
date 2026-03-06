@@ -37,11 +37,11 @@ export function ensureItemType(): void {
 export function listInstalledRoutines(): InstalledRoutine[] {
   try {
     const output = centy('list', 'routines', '--json')
-    const items = JSON.parse(output) as Array<{
+    const items: Array<{
       id: string
       title: string
       body: string
-    }>
+    }> = JSON.parse(output)
     return items.map(item => ({
       slug: item.id,
       title: item.title,
