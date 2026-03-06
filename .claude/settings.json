@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(centy item-type:*)",
+      "Bash(centy create:*)",
+      "Bash(centy update:*)",
+      "Bash(centy list:*)",
+      "Bash(gh repo:*)",
+      "Bash(git push:*)",
+      "Bash(centy:*)",
+      "Bash(gh run:*)"
+    ]
+  }
+}
