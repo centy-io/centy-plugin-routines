@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 (2026-03-07)
+
+### Features
+
+- Add "Add Lint Rules" routine — analyzes codebases, selects new error-level lint rules, fixes violations, and opens a PR
+
+### Chores
+
+- Add Bash permissions for release and git commands in settings.json
+
 ## 0.2.1 (2026-03-06)
 
 ### Docs
