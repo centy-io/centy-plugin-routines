@@ -35,4 +35,11 @@ export const catalog: CatalogRoutine[] = [
     version: 2,
     body: withVersion(loadRoutine('release-new-version.md'), 2),
   },
+  {
+    slug: 'add-lint-rules',
+    title: 'Add Lint Rules',
+    description: 'Analyze code and add new error-level lint rules to improve code quality, then open a PR',
+    version: 1,
+    body: withVersion(loadRoutine('add-lint-rules.md'), 1),
+  },
 ]
